@@ -11,6 +11,7 @@ import {
   MoreHorizontal,
   PieChart,
   Settings,
+  Sparkles,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
@@ -22,12 +23,13 @@ export function MobileBottomNav() {
 
   const primaryItems = [
     { href: "/dashboard", label: "Home", icon: LayoutDashboard },
-    { href: "/lending", label: "Lending", icon: Users },
+    { href: "/ai", label: "AI", icon: Sparkles },
     { href: "/expenses", label: "Expenses", icon: Receipt },
     { href: "/cards", label: "Cards", icon: CreditCard },
   ];
 
   const moreItems = [
+    { href: "/lending", label: "Money Lending", icon: Users, desc: "Loans & repayments tracker" },
     { href: "/budgets", label: "Monthly Budgets", icon: PieChart, desc: "Monitor limits & alerts" },
     { href: "/settings", label: "Settings", icon: Settings, desc: "Account & preferences" },
   ];

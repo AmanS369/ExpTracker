@@ -9,6 +9,7 @@ import {
   Receipt,
   CreditCard,
   PieChart,
+  Sparkles,
   LogOut,
   User,
   Wallet,
@@ -31,6 +32,7 @@ export function Navbar({ user }: NavbarProps) {
     { href: "/expenses", label: "Expenses", icon: Receipt },
     { href: "/cards", label: "Cards", icon: CreditCard },
     { href: "/budgets", label: "Budgets", icon: PieChart },
+    { href: "/ai", label: "AI Assistant", icon: Sparkles },
   ];
 
   const handleLogout = async () => {
