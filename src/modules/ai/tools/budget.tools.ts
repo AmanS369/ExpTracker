@@ -7,8 +7,8 @@ export const budgetToolDefinitions: LLMToolDefinition[] = [
     parameters: {
       type: "object",
       properties: {
-        month: { type: "number", description: "Month (1-12)" },
-        year: { type: "number", description: "Year (e.g. 2026)" },
+        month: { type: ["number", "null"], description: "Optional month number (1-12)" },
+        year: { type: ["number", "null"], description: "Optional year (e.g. 2026)" },
       },
     },
   },
@@ -18,8 +18,8 @@ export const budgetToolDefinitions: LLMToolDefinition[] = [
     parameters: {
       type: "object",
       properties: {
-        month: { type: "number", description: "Month (1-12)" },
-        year: { type: "number", description: "Year (e.g. 2026)" },
+        month: { type: ["number", "null"], description: "Optional month number (1-12)" },
+        year: { type: ["number", "null"], description: "Optional year (e.g. 2026)" },
       },
     },
   },
@@ -30,8 +30,8 @@ export const budgetToolDefinitions: LLMToolDefinition[] = [
       type: "object",
       properties: {
         categoryName: { type: "string", description: "Name of the category" },
-        month: { type: "number", description: "Month (1-12)" },
-        year: { type: "number", description: "Year (e.g. 2026)" },
+        month: { type: ["number", "null"], description: "Optional month number (1-12)" },
+        year: { type: ["number", "null"], description: "Optional year (e.g. 2026)" },
       },
       required: ["categoryName"],
     },
@@ -43,12 +43,11 @@ export const budgetToolDefinitions: LLMToolDefinition[] = [
       type: "object",
       properties: {
         amount: { type: "number", description: "Budget amount in ₹" },
-        categoryName: { type: "string", description: "Optional category name (omit for overall monthly budget)" },
-        month: { type: "number", description: "Month (1-12)" },
-        year: { type: "number", description: "Year (e.g. 2026)" },
+        categoryName: { type: ["string", "null"], description: "Optional category name (omit or null for overall monthly budget)" },
+        month: { type: ["number", "null"], description: "Optional month number (1-12)" },
+        year: { type: ["number", "null"], description: "Optional year (e.g. 2026)" },
       },
       required: ["amount"],
     },
   },
 ];
-

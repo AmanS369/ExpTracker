@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import { connectToDatabase } from "@/lib/db/mongodb";
 import { AIPendingAction } from "@/models/AIPendingAction";
+import { AIConversation } from "@/models/AIConversation";
+import { AIChatMessage } from "@/models/AIChatMessage";
+import { computeSlidingExpiration } from "../config/ai.config";
 import { ExpenseService } from "@/services/expense.service";
 import { LendingService } from "@/services/lending.service";
 import { CreditCardService } from "@/services/credit-card.service";
@@ -840,6 +843,20 @@ export class ToolExecutionService {
 
     action.status = "CONFIRMED";
     await action.save();
+
+    // Reset the sliding 1-hour inactivity expiration for this conversation
+    if (action.conversationId) {
+      const now = new Date();
+      const expiresAt = computeSlidingExpiration(now);
+      await AIConversation.updateOne(
+        { _id: action.conversationId, userId: new mongoose.Types.ObjectId(userId) },
+        { $set: { lastActivityAt: now, expiresAt } }
+      );
+      await AIChatMessage.updateMany(
+        { conversationId: action.conversationId },
+        { $set: { expiresAt } }
+      );
+    }
 
     return {
       success: true,

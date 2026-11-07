@@ -1,8 +1,11 @@
 const config = {
   plugins: {
-    "@tailwindcss/postcss": {},
+    "@tailwindcss/postcss": {
+      base: process.cwd(),
+    },
   },
 };
 
 export default config;
+
 

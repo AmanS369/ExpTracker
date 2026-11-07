@@ -7,10 +7,10 @@ export const expenseToolDefinitions: LLMToolDefinition[] = [
     parameters: {
       type: "object",
       properties: {
-        month: { type: "number", description: "Month (1-12). Defaults to current month." },
-        year: { type: "number", description: "Year (e.g. 2026). Defaults to current year." },
-        startDate: { type: "string", description: "Optional start date in YYYY-MM-DD format" },
-        endDate: { type: "string", description: "Optional end date in YYYY-MM-DD format" },
+        month: { type: ["number", "null"], description: "Optional month number (1-12). Defaults to current month if omitted." },
+        year: { type: ["number", "null"], description: "Optional year (e.g. 2026). Defaults to current year if omitted." },
+        startDate: { type: ["string", "null"], description: "Optional start date in YYYY-MM-DD format" },
+        endDate: { type: ["string", "null"], description: "Optional end date in YYYY-MM-DD format" },
       },
     },
   },
@@ -20,8 +20,8 @@ export const expenseToolDefinitions: LLMToolDefinition[] = [
     parameters: {
       type: "object",
       properties: {
-        month: { type: "number", description: "Month (1-12). Defaults to current month." },
-        year: { type: "number", description: "Year (e.g. 2026). Defaults to current year." },
+        month: { type: ["number", "null"], description: "Optional month number (1-12). Defaults to current month if omitted." },
+        year: { type: ["number", "null"], description: "Optional year (e.g. 2026). Defaults to current year if omitted." },
       },
     },
   },
@@ -31,8 +31,8 @@ export const expenseToolDefinitions: LLMToolDefinition[] = [
     parameters: {
       type: "object",
       properties: {
-        limit: { type: "number", description: "Number of expenses to fetch (default: 5, max: 20)" },
-        categoryId: { type: "string", description: "Optional category filter" },
+        limit: { type: ["number", "null"], description: "Number of expenses to fetch (default: 5, max: 20)" },
+        categoryId: { type: ["string", "null"], description: "Optional category ID filter" },
       },
     },
   },
@@ -44,15 +44,15 @@ export const expenseToolDefinitions: LLMToolDefinition[] = [
       properties: {
         title: { type: "string", description: "Title or item of the expense (e.g. 'Groceries', 'Coffee')" },
         amount: { type: "number", description: "Amount in Indian Rupees (₹)" },
-        categoryName: { type: "string", description: "Category name (e.g. 'Food & Dining', 'Groceries', 'Travel')" },
+        categoryName: { type: ["string", "null"], description: "Category name (e.g. 'Food & Dining', 'Groceries', 'Travel')" },
         paymentMethod: {
-          type: "string",
-          enum: ["CASH", "UPI", "BANK_TRANSFER", "DEBIT_CARD", "CREDIT_CARD"],
+          type: ["string", "null"],
+          enum: ["CASH", "UPI", "BANK_TRANSFER", "DEBIT_CARD", "CREDIT_CARD", null],
           description: "Payment method used (default: UPI)",
         },
-        creditCardName: { type: "string", description: "Name of credit card if paymentMethod is CREDIT_CARD" },
-        date: { type: "string", description: "Date in YYYY-MM-DD format. Defaults to today." },
-        notes: { type: "string", description: "Optional notes" },
+        creditCardName: { type: ["string", "null"], description: "Name of credit card if paymentMethod is CREDIT_CARD" },
+        date: { type: ["string", "null"], description: "Date in YYYY-MM-DD format. Defaults to today." },
+        notes: { type: ["string", "null"], description: "Optional notes" },
       },
       required: ["title", "amount"],
     },
@@ -64,10 +64,13 @@ export const expenseToolDefinitions: LLMToolDefinition[] = [
       type: "object",
       properties: {
         expenseId: { type: "string", description: "ID of the expense to update" },
-        title: { type: "string", description: "New title" },
-        amount: { type: "number", description: "New amount in ₹" },
-        categoryName: { type: "string", description: "New category name" },
-        paymentMethod: { type: "string", enum: ["CASH", "UPI", "BANK_TRANSFER", "DEBIT_CARD", "CREDIT_CARD"] },
+        title: { type: ["string", "null"], description: "New title" },
+        amount: { type: ["number", "null"], description: "New amount in ₹" },
+        categoryName: { type: ["string", "null"], description: "New category name" },
+        paymentMethod: {
+          type: ["string", "null"],
+          enum: ["CASH", "UPI", "BANK_TRANSFER", "DEBIT_CARD", "CREDIT_CARD", null],
+        },
       },
       required: ["expenseId"],
     },
@@ -84,4 +87,3 @@ export const expenseToolDefinitions: LLMToolDefinition[] = [
     },
   },
 ];
-

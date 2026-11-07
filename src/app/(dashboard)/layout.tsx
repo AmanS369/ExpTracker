@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/auth/session";
 import { Navbar } from "@/components/navigation/Navbar";
 import { MobileBottomNav } from "@/components/navigation/MobileBottomNav";
+import { GlobalAIAssistant } from "@/components/ai/GlobalAIAssistant";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const user = await getSessionUser();
@@ -16,7 +18,11 @@ export default async function DashboardLayout({ children }: { children: React.Re
         {children}
       </main>
       <MobileBottomNav />
+
+      {/* Global Floating AI Assistant with 1-Hour Ephemeral Memory */}
+      <Suspense fallback={null}>
+        <GlobalAIAssistant />
+      </Suspense>
     </div>
   );
 }
-

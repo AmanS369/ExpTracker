@@ -34,8 +34,8 @@ export const lendingToolDefinitions: LLMToolDefinition[] = [
     parameters: {
       type: "object",
       properties: {
-        personName: { type: "string", description: "Optional name of the person" },
-        limit: { type: "number", description: "Number of transactions to fetch (default: 10)" },
+        personName: { type: ["string", "null"], description: "Optional name of the person" },
+        limit: { type: ["number", "null"], description: "Number of transactions to fetch (default: 10)" },
       },
     },
   },
@@ -48,12 +48,12 @@ export const lendingToolDefinitions: LLMToolDefinition[] = [
         personName: { type: "string", description: "Name of the person borrowing money" },
         amount: { type: "number", description: "Amount lent in ₹" },
         paymentMethod: {
-          type: "string",
-          enum: ["CASH", "UPI", "BANK_TRANSFER", "OTHER"],
+          type: ["string", "null"],
+          enum: ["CASH", "UPI", "BANK_TRANSFER", "OTHER", null],
           description: "Payment method used (default: UPI)",
         },
-        description: { type: "string", description: "Reason or description for lending" },
-        date: { type: "string", description: "Date in YYYY-MM-DD format (defaults to today)" },
+        description: { type: ["string", "null"], description: "Reason or description for lending" },
+        date: { type: ["string", "null"], description: "Date in YYYY-MM-DD format (defaults to today)" },
       },
       required: ["personName", "amount"],
     },
@@ -67,15 +67,14 @@ export const lendingToolDefinitions: LLMToolDefinition[] = [
         personName: { type: "string", description: "Name of the person returning money" },
         amount: { type: "number", description: "Repayment amount received in ₹" },
         paymentMethod: {
-          type: "string",
-          enum: ["CASH", "UPI", "BANK_TRANSFER", "OTHER"],
+          type: ["string", "null"],
+          enum: ["CASH", "UPI", "BANK_TRANSFER", "OTHER", null],
           description: "Payment method received in (default: UPI)",
         },
-        description: { type: "string", description: "Description or notes" },
-        date: { type: "string", description: "Date in YYYY-MM-DD format (defaults to today)" },
+        description: { type: ["string", "null"], description: "Description or notes" },
+        date: { type: ["string", "null"], description: "Date in YYYY-MM-DD format (defaults to today)" },
       },
       required: ["personName", "amount"],
     },
   },
 ];
-

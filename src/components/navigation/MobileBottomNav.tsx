@@ -23,7 +23,7 @@ export function MobileBottomNav() {
 
   const primaryItems = [
     { href: "/dashboard", label: "Home", icon: LayoutDashboard },
-    { href: "/ai", label: "AI", icon: Sparkles },
+    { isAI: true, label: "AI", icon: Sparkles },
     { href: "/expenses", label: "Expenses", icon: Receipt },
     { href: "/cards", label: "Cards", icon: CreditCard },
   ];
@@ -102,8 +102,29 @@ export function MobileBottomNav() {
       {/* Persistent Bottom Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200/90 bg-white/95 backdrop-blur-md px-3 py-2 pb-safe">
         <div className="flex items-center justify-around">
-          {primaryItems.map((item) => {
+          {primaryItems.map((item: any) => {
             const Icon = item.icon;
+            if (item.isAI) {
+              return (
+                <button
+                  key="ai-assistant-btn"
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(new CustomEvent("toggle-ai-assistant"));
+                    }
+                  }}
+                  className="flex flex-col items-center justify-center py-1 px-3 rounded-xl transition duration-150 text-indigo-600 hover:text-indigo-700 cursor-pointer"
+                >
+                  <div className="relative">
+                    <Icon className="h-5 w-5 stroke-[2.2] animate-pulse" />
+                    <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-indigo-500" />
+                  </div>
+                  <span className="text-[10px] mt-1 font-bold text-indigo-600">{item.label}</span>
+                </button>
+              );
+            }
+
             const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
             return (
               <Link

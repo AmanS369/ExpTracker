@@ -29,11 +29,18 @@ export async function GET(
     const messages = await AIChatMessage.find({
       userId: uId,
       conversationId: convId,
-      role: { $in: ["user", "assistant"] }, // user and assistant visible messages
+      role: { $in: ["user", "assistant"] },
     })
       .sort({ createdAt: 1 })
       .populate("pendingActionId")
       .lean();
+
+    // Display only user-visible messages (user queries, final assistant answers, or action confirmations)
+    const visibleMessages = messages.filter(
+      (m) =>
+        m.role === "user" ||
+        (m.role === "assistant" && (m.content?.trim().length > 0 || m.pendingActionId))
+    );
 
     return NextResponse.json({
       conversation: {
@@ -42,7 +49,7 @@ export async function GET(
         createdAt: conversation.createdAt,
         updatedAt: conversation.updatedAt,
       },
-      messages: messages.map((m) => ({
+      messages: visibleMessages.map((m) => ({
         id: m._id.toString(),
         role: m.role,
         content: m.content,

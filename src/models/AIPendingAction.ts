@@ -35,6 +35,7 @@ const AIPendingActionSchema = new Schema<IAIPendingAction>(
   }
 );
 
+AIPendingActionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 AIPendingActionSchema.index({ userId: 1, conversationId: 1, status: 1 });
 
 export const AIPendingAction: Model<IAIPendingAction> =
