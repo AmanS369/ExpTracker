@@ -23,3 +23,4 @@ AIConversationSchema.index({ userId: 1, updatedAt: -1 });
 export const AIConversation: Model<IAIConversation> =
   mongoose.models.AIConversation ||
   mongoose.model<IAIConversation>("AIConversation", AIConversationSchema);
+

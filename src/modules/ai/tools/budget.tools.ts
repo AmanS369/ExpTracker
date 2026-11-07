@@ -51,3 +51,4 @@ export const budgetToolDefinitions: LLMToolDefinition[] = [
     },
   },
 ];
+

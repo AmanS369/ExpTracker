@@ -11,3 +11,4 @@ export interface LLMProvider {
    */
   streamResponse?(request: LLMRequest): AsyncIterable<string>;
 }
+

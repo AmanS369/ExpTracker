@@ -94,3 +94,4 @@ export async function DELETE(
     return NextResponse.json({ error: err.message || "Failed to delete conversation" }, { status: 500 });
   }
 }
+

@@ -42,3 +42,4 @@ You help the user understand their spending, track money lent to or owed by othe
 - Registered Contacts: ${context.peopleCount}
 `;
 }
+

@@ -34,3 +34,4 @@ AIChatMessageSchema.index({ userId: 1, conversationId: 1, createdAt: 1 });
 export const AIChatMessage: Model<IAIChatMessage> =
   mongoose.models.AIChatMessage ||
   mongoose.model<IAIChatMessage>("AIChatMessage", AIChatMessageSchema);
+
