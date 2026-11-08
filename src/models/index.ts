@@ -6,4 +6,6 @@ export * from "./CreditCard";
 export * from "./CreditCardTransaction";
 export * from "./Expense";
 export * from "./Budget";
-
+export * from "./AIConversation";
+export * from "./AIChatMessage";
+export * from "./AIPendingAction";

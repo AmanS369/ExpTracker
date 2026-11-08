@@ -9,6 +9,7 @@ import {
   Receipt,
   CreditCard,
   PieChart,
+  Sparkles,
   LogOut,
   User,
   Wallet,
@@ -32,6 +33,12 @@ export function Navbar({ user }: NavbarProps) {
     { href: "/cards", label: "Cards", icon: CreditCard },
     { href: "/budgets", label: "Budgets", icon: PieChart },
   ];
+
+  const handleOpenAI = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("toggle-ai-assistant"));
+    }
+  };
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
@@ -84,6 +91,15 @@ export function Navbar({ user }: NavbarProps) {
               </Link>
             );
           })}
+          <button
+            type="button"
+            onClick={handleOpenAI}
+            className="flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/80 hover:bg-indigo-100/80 transition ml-1 shadow-xs cursor-pointer"
+            title="Open AI Financial Assistant"
+          >
+            <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
+            <span>AI Assistant</span>
+          </button>
         </nav>
 
         {/* User / Actions */}
